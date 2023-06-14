@@ -1,12 +1,13 @@
-import { existsSync, statSync, readFileSync } from 'fs';
+const fs = require('fs');
 const countStudents = (dataPath) => {
-  if (!existsSync(dataPath)) {
+  if (!fs.existsSync(dataPath)) {
     throw new Error('Cannot load the database');
   }
-  if (!statSync(dataPath).isFile()) {
+  if (!fs.statSync(dataPath).isFile()) {
     throw new Error('Cannot load the database');
   }
-  const fileLines = readFileSync(dataPath, 'utf-8')
+  const fileLines = fs
+    .readFileSync(dataPath, 'utf-8')
     .toString('utf-8')
     .trim()
     .split('\n');
@@ -40,4 +41,4 @@ const countStudents = (dataPath) => {
   }
 };
 
-export default countStudents;
+module.exports = countStudents;
